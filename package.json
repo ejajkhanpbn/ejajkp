@@ -19,6 +19,7 @@
     "playwright": "^1.60.0"
   },
   "dependencies": {
-    "copilot": "^0.0.2"
+    "copilot": "^0.0.2",
+    "xlsx": "^0.18.5"
   }
 }

@@ -1,5 +1,6 @@
 import {expect,test} from '@playwright/test';
 
+
 test('GET request to API', async ({request}) => {
   const toolId = 6483;  
   const response = await request.get(`https://simple-tool-rental-api.click/tools/${toolId}`);
@@ -38,11 +39,12 @@ test('GET request to API Category', async ({request}) => {
 test('Token Generation', async ({request}) => {
   const requestBody = {
    "clientName": "Postman App",
-   "clientEmail": "valentin123day@example.com"
+   "clientEmail": "valentin124day@example.com"
 }
     const response = await request.post('https://simple-tool-rental-api.click/api-clients', {
     data: requestBody
   });
+  console.log('Response status:', response.status());
   expect(response.status()).toBe(201);
   const responseData = await response.json();
   console.log(responseData);
@@ -92,17 +94,19 @@ test('Patch request to API', async ({request}) => {
   const body = await response.body();
   expect(body.length).toBe(0); // Assert that the response body is empty
   console.log('Patch request successful. Response body is empty.');
+  console.log(await response.json());
 });
 
 test('Delete request to API', async ({request}) => {
   const accessToken= '82cf30eb99e18ff47ea3016608ad68610a8bf41c5827c3384757df26f4df38d8';
-  const orderId= 'sGKtGQzani4SExb0uyJTJ';
+  const orderId= 'p12zJbjCzEdw-ySMagTHC';
   const response = await request.delete(`https://simple-tool-rental-api.click/orders/${orderId}`, {
     headers: {
       'Authorization': `Bearer ${accessToken}`,
       'Accept': 'application/json'
     }
   });
+  console.log('Response status:', response.status());
   expect(response.status()).toBe(204);
   const body = await response.body();
   expect(body.length).toBe(0); // Assert that the response body is empty
