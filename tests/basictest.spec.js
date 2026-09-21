@@ -16,9 +16,9 @@ test('Login Form',async ({page}) => {
 
 test('Selection of Dropdown',async ({page,request}) => {
    await page.goto('https://www.selenium.dev/selenium/web/web-form.html');
-   await page.getByLabel('File input').type('/Users/ejaj_khan/Downloads/30009457_Ejaj.pptx');
+   await page.getByLabel('File input').setInputFiles('/Users/ejaj_khan/Downloads/30009457_Ejaj.pptx');
    await page.getByRole('button',{name:'Submit'}).click();
-   await expect(page.locator('#message')).toHaveText('Received!');  
+   await expect(page.locator('#message')).toHaveText('Received!');
 });
 test('Alert handing Accept',async({page})=>{
    await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
@@ -127,4 +127,13 @@ test('Total Count of Chennai',async({page})=>{
       totalCount += parseInt(await element.textContent());
    }
    console.log(`Total Count of Chennai: ${totalCount}`);
+});
+
+test('Dropdown Selection',async({page})=>{
+   await page.goto('https://rahulshettyacademy.com/AutomationPractice/');
+   const dropdown = page.locator('#dropdown-class-example');
+   await dropdown.selectOption('option2');
+   const selectedValue = await dropdown.inputValue();
+   console.log(`Selected value: ${selectedValue}`);
+   expect(selectedValue).toBe('option2');
 });
